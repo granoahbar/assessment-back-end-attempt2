@@ -27,5 +27,9 @@ module.exports = {
 
     res.status(200).send(randomColor)
     }
+,
+    postMotivation: (req,res) => {
+        let motivation = [""]
+    }
 }
 

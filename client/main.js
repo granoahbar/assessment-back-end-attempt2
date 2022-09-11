@@ -37,3 +37,16 @@ const getColor = () => {
 };
 
 colorBtn.addEventListener('click', getColor)
+
+
+
+const motivationBtn = document.getElementById("motivationButton")
+const motivationTxt = document.getElementById("motivationTxt")
+
+    const postMotivation = () => {
+        axios.post("http://localhost:4000/api/motivation/", {submittedMotivation: motivationTxt.textContent})
+        .then (alert("Motivation received!")  
+        )
+};
+
+motivationBtn.addEventListener('click', postMotivation)

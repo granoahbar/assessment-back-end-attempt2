@@ -21,3 +21,7 @@ app.get("/api/fortune", getFortune);
 const {getColor} = require('./controller')
 
 app.get("/api/color", getColor);
+
+const {postMotivation} = require('./controller')
+
+app.post ("/api/motivation", postMotivation)
