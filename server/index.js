@@ -9,19 +9,12 @@ app.use(express.json());
 
 app.listen(4000, () => console.log("Server running on 4000"));
 
+///////////////////////////////////////////////////////////////////////////////////////////
 
-const {getCompliment} = require('./controller')
+const {getCompliment, getColor, getFortune, getMotivations, addMotivation} = require('./controller')
 
 app.get("/api/compliment", getCompliment);
-
-const {getFortune} = require('./controller')
-
 app.get("/api/fortune", getFortune);
-
-const {getColor} = require('./controller')
-
 app.get("/api/color", getColor);
-
-const {postMotivation} = require('./controller')
-
-app.post ("/api/motivation", postMotivation)
+app.get('/api/motivations', getMotivations);
+app.post('/api/addMotivation', addMotivation);

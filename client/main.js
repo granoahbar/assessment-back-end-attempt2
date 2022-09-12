@@ -1,4 +1,14 @@
+const baseURL = 'http://localhost:4000'
+
 const complimentBtn = document.getElementById("complimentButton")
+const fortuneBtn = document.getElementById("fortuneButton")
+const colorBtn = document.getElementById("colorButton")
+const getMotivationsBtn = document.getElementById('getMotivations')
+const motivationBin = document.getElementById('displayMotivations')
+const addForm = document.getElementById('addForm')
+const addInput = document.getElementById('addInput')
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
@@ -8,12 +18,6 @@ const getCompliment = () => {
     });
 };
 
-complimentBtn.addEventListener('click', getCompliment)
-
-
-
-const fortuneBtn = document.getElementById("fortuneButton")
-
 const getFortune = () => {
     axios.get("http://localhost:4000/api/fortune/")
         .then (res => {
@@ -21,12 +25,6 @@ const getFortune = () => {
             alert(data)
         })
 };
-
-fortuneBtn.addEventListener('click', getFortune)
-
-
-
-const colorBtn = document.getElementById("colorButton")
 
 const getColor = () => {
     axios.get("http://localhost:4000/api/color/")
@@ -36,17 +34,44 @@ const getColor = () => {
         })
 };
 
-colorBtn.addEventListener('click', getColor)
-
-
-
-const motivationBtn = document.getElementById("motivationButton")
-const motivationTxt = document.getElementById("motivationTxt")
-
-    const postMotivation = () => {
-        axios.post("http://localhost:4000/api/motivation/", {submittedMotivation: motivationTxt.textContent})
-        .then (alert("Motivation received!")  
-        )
+const getMotivations = () => {
+    axios.get(`${baseURL}/api/motivations`)
+    .then((res) => {
+        console.log(res.data)
+        const weapons = res.data
+        for (let i = 0;i < getMotivations.length; i++){
+            let newMotivation = document.createElement('li')
+                newMotivation.textContent = motivations[i]
+                motivationBin.appendChild(newMotivation)
+        }
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 };
 
-motivationBtn.addEventListener('click', postMotivation)
+const addNewItem = (event) => {
+    event.preventDefault()
+
+    let bodyObj = {
+        item: addInput.value
+    }
+
+    axios.post(`${baseURL}/api/addMotivation`, bodyObj)
+     .then((res) => {
+          console.log(res.data)
+      })
+     .catch((err) => {
+        console.log(err)
+     })
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+complimentBtn.addEventListener('click', getCompliment)
+fortuneBtn.addEventListener('click', getFortune)
+colorBtn.addEventListener('click', getColor)
+getMotivationsBtn.addEventListener('click', getMotivations)
+addForm.addEventListener('submit', addNewItem)
