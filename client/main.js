@@ -38,8 +38,8 @@ const getMotivations = () => {
     axios.get(`${baseURL}/api/motivations`)
     .then((res) => {
         console.log(res.data)
-        const weapons = res.data
-        for (let i = 0;i < getMotivations.length; i++){
+        const motivations = res.data
+        for (let i = 0; i < motivations.length; i++){
             let newMotivation = document.createElement('li')
                 newMotivation.textContent = motivations[i]
                 motivationBin.appendChild(newMotivation)
